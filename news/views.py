@@ -27,7 +27,7 @@ class ArticleView(View):
             if list_item["link"] == int(link):
                 context = {"article": list_item}
                 return render(request, "article.html", context)
-        return redirect("main", permament=True)
+        return redirect("main", permanent=True)
 
 
 class AddArticleView(View):
