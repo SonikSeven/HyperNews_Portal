@@ -18,7 +18,6 @@ class MainView(View):
         if query := request.GET.get("q"):
             news_list = [article for article in news_list if query.lower() in article["title"].lower()]
         context = {"news_list": news_list}
-        print(request)
         return render(request, "main.html", context)
 
 
@@ -28,7 +27,7 @@ class ArticleView(View):
             if list_item["link"] == int(link):
                 context = {"article": list_item}
                 return render(request, "article.html", context)
-        return redirect("/news/")
+        return redirect("main", permament=True)
 
 
 class AddArticleView(View):
