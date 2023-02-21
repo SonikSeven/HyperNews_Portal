@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.conf import settings
-from django.http import HttpResponse, Http404
 
 import json
 import datetime
@@ -22,12 +21,12 @@ class MainView(View):
 
 
 class ArticleView(View):
-    def get(self, request, link):
+    def get(self, request, article_number):
         for list_item in load_json():
-            if list_item["link"] == int(link):
+            if list_item["link"] == int(article_number):
                 context = {"article": list_item}
                 return render(request, "article.html", context)
-        return redirect("main", permanent=True)
+        return redirect("main")
 
 
 class AddArticleView(View):
@@ -45,4 +44,4 @@ class AddArticleView(View):
         news_list.append(new_article)
         with open(settings.NEWS_JSON_PATH, "w") as json_file:
             json.dump(news_list, json_file)
-        return redirect("/news/")
+        return redirect("main")

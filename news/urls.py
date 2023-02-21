@@ -6,10 +6,11 @@ from . import views
 
 
 urlpatterns = [
-    path("", RedirectView.as_view(url="news")),
-    path("news/", views.MainView.as_view(), name="main"),
-    path("news/<int:link>/", views.ArticleView.as_view()),
-    path("news/create/", views.AddArticleView.as_view()),
+    re_path("^news/?$", views.MainView.as_view(), name="main"),
+    path("", RedirectView.as_view(pattern_name="main")),
+    re_path(r"^news/(?P<article_number>\d+)/?$", views.ArticleView.as_view()),
+    re_path("^news/create/?$", views.AddArticleView.as_view(), name="create_article"),
 ]
 
-urlpatterns += static(settings.STATIC_URL)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL)
