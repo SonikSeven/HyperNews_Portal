@@ -26,7 +26,7 @@ class ArticleView(View):
             if list_item["link"] == int(article_number):
                 context = {"article": list_item}
                 return render(request, "article.html", context)
-        return redirect("main")
+        return redirect("main_url")
 
 
 class AddArticleView(View):
@@ -44,4 +44,4 @@ class AddArticleView(View):
         news_list.append(new_article)
         with open(settings.NEWS_JSON_PATH, "w") as json_file:
             json.dump(news_list, json_file)
-        return redirect("main")
+        return redirect("main_url")

@@ -18,6 +18,6 @@ from django.urls import path, re_path
 from django.urls import include
 
 urlpatterns = [
-    re_path("^admin/?$", admin.site.urls, name="create_article"),
+    re_path("^admin/", admin.site.urls, name="create_article"),
     path("", include("news.urls"))
 ]

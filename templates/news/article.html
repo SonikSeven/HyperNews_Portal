@@ -1,10 +1,16 @@
 {% extends "base.html" %}
+
+
 {% block title %}
 {{ article.title }}
 {% endblock %}
+
+
 {% block body %}
+
 <h2>{{ article.title }}</h2>
 <p>{{ article.created }}</p>
 <p>{{ article.text }}</p>
-<a href="/news/">Main page</a>
+<a href="{% url 'main_url' %}">Main page</a>
+
 {% endblock %}
